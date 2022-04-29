@@ -13,27 +13,27 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function getSeason(date) {
   //throw new NotImplementedError('Not implemented');
+  //console.log('getMonth', date.hasOwnProperty('getMonth'));
+
   function isValidDate(value) {
     let dateWrapper = new Date(value);
     return (!isNaN(dateWrapper.getDate()));
   }
   //console.log('typeof date', typeof date);
   if (date) {
-    if ((Object.prototype.toString.call(date) === "[object Date]") && (isValidDate(date)) && (date instanceof Date)) {
-      //console.log("instance:", date instanceof Date);
-      //console.log(date.toString());
+    if ((Object.prototype.toString.call(date) === "[object Date]") && (isValidDate(date)) && (date instanceof Date) && !(date.hasOwnProperty('getMonth'))) {
       let month = date.getMonth();
-      console.log(date, month);
+      console.log(date, month, date.hasOwnProperty('getMonth'));
       if (month == 0 || month == 1 || month == 11) return 'winter';
       else if (month == 2 || month == 3 || month == 4) return 'spring';
       else if (month == 5 || month == 6 || month == 7) return 'summer'
       else return 'autumn';
-    } else return new NotImplementedError('Invalid date!');
+    } else throw new Error('Invalid date!');
 
   } else return 'Unable to determine the time of year!'
 }
-let input = new Date(1994, 8, 26, 3, 0, 11, 500);
-console.log(getSeason(input));
+/*let input = new Date(1994, 8, 26, 3, 0, 11, 500);
+console.log(getSeason(input));*/
 module.exports = {
   getSeason
 }
