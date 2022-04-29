@@ -45,7 +45,7 @@ function transform(arr) {
         }
       } else trans.push(arr[i]);
     } return trans;
-  } else throw new NotImplementedError('\'arr\' parameter must be an instance of the Array!')
+  } else throw new Error('\'arr\' parameter must be an instance of the Array!')
 }
 
 module.exports = {
