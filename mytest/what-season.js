@@ -13,6 +13,7 @@
  */
 function getSeason(date) {
    //throw new NotImplementedError('Not implemented');
+   console.log('date.toSource', date.toSource);
    function isValidDate(value) {
       let dateWrapper = new Date(value);
       console.log(value, !isNaN(dateWrapper.getDate()));

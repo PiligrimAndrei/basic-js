@@ -15,19 +15,15 @@ function getSeason(date) {
   //throw new NotImplementedError('Not implemented');
   function isValidDate(value) {
     let dateWrapper = new Date(value);
-    //console.log(value, !isNaN(dateWrapper.getDate()));
     return (!isNaN(dateWrapper.getDate()));
   }
-  //console.log("isValidDate(date)", isValidDate(date))
-  //console.log("Object.prototype.toString", Object.prototype.toString);
-  let ControlDate = new Date(date)
-  console.log("date.toString", (date.toString.call(date)), "Object", (ControlDate.toString.call(date)));
+  //console.log('typeof date', typeof date);
   if (date) {
     if ((Object.prototype.toString.call(date) === "[object Date]") && (isValidDate(date)) && (date instanceof Date)) {
       //console.log("instance:", date instanceof Date);
       //console.log(date.toString());
       let month = date.getMonth();
-      //console.log(month);
+      console.log(date, month);
       if (month == 0 || month == 1 || month == 11) return 'winter';
       else if (month == 2 || month == 3 || month == 4) return 'spring';
       else if (month == 5 || month == 6 || month == 7) return 'summer'
