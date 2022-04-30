@@ -9,36 +9,45 @@ const chainMaker = {
     return this.chain.length;
   },
   addLink(value) {
-    if (value === null) {
-      this.chain.push(null)
-    } else {
-      this.chain.push(value);
+    if (arguments.length == 0) {
+      this.chain.push('');
+    } else if (value === null) {
+      this.chain.push('null');
     }
-    console.log(this.chain);
+    else {
+      //console.log(value);
+      this.chain.push(value);
+      //console.log(this.chain.length, "add", this.chain);
+    }
     return this;
   },
   removeLink(position) {
-    console.log(position);
-    if (typeof (position) != 'number' || !Number.isInteger(position) || position > this.chain.length - 1 || position < 0) {
-      chain = [];
-      console.log('ERROR');
+    if (typeof (position) !== 'number' || !Number.isInteger(position) || position > this.length || position <= 0) {
+      this.chain = [];
+      //console.log('ERROR');
+      //console.log(position);
       throw new NotImplementedError('You can\'t remove incorrect link!');
     } else {
       this.chain.splice(position - 1, 1);
-      return this;
+      //console.log(this.chain.length, "--", position, "remove", this.chain);
     }
+    return this;
   },
   reverseChain() {
+
     this.chain.reverse();
+    //console.log('reverse', this.chain);
     return this;
   },
   finishChain() {
-    return '( ' + this.chain.join(' )~~( ') + ' )';
+    finishArr = this.chain;
+    this.chain = [];
+    return '( ' + finishArr.join(' )~~( ') + ' )';
   },
-  chain: [],
-};
+  chain: []
+}
 
-//console.log(chainMaker.reverseChain().reverseChain().addLink(NaN).addLink({ 0: 'first', 1: 'second', 'length': 2 }).addLink({ 0: 'first', 1: 'second', 'length': 2 }).addLink({ 0: 'first', 1: 'second', 'length': 2 }).reverseChain().reverseChain().addLink({ 0: 'first', 1: 'second', 'length': 2 }).addLink(true).finishChain());
+//console.log(chainMaker.addLink('GHI').addLink(null).reverseChain().addLink(333).reverseChain().reverseChain().addLink(0).reverseChain().reverseChain().addLink('GHI').finishChain());
 module.exports = {
   chainMaker
-};
+}
