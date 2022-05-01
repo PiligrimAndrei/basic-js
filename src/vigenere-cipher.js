@@ -20,9 +20,13 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 class VigenereCipheringMachine {
-  /* constructor(reverse) {
-     reverse = true;
-   }*/
+  constructor(value) {
+    if (value == false) {
+      this.type = 'reverse';
+    } else {
+      this.type = 'forward';
+    }
+  }
   encrypt(message, key) {
     if (message && key) {
       let chiper = ''
@@ -60,7 +64,9 @@ class VigenereCipheringMachine {
           chiper += letterMsg;
         }
       }
-      return chiper.toUpperCase()
+      if (this.type != 'reverse') {
+        return chiper.toUpperCase()
+      } else return chiper.toUpperCase().split("").reverse().join("");
     } else throw Error('Incorrect arguments!')
   }
   decrypt(message, key) {
@@ -99,7 +105,9 @@ class VigenereCipheringMachine {
           chiper += letterMsg;
         }
       }
-      return chiper.toUpperCase()
+      if (this.type != 'reverse') {
+        return chiper.toUpperCase()
+      } else return chiper.toUpperCase().split("").reverse().join("")
     } else throw Error('Incorrect arguments!')
   }
 };
