@@ -17,18 +17,19 @@ function getSeason(date) {
 
   function isValidDate(value) {
     let dateWrapper = new Date(value);
-    return (!isNaN(dateWrapper.getDate()));
+    //console.log(dateWrapper.getUTCDate == date.getUTCDate);
+    return (!isNaN(dateWrapper.getUTCDate()));
   }
   //console.log('typeof date', typeof date);
   if (date) {
-    if ((Object.prototype.toString.call(date) === "[object Date]") && (isValidDate(date)) && (date instanceof Date) && !(date.hasOwnProperty('getMonth'))) {
+    if ((Object.prototype.toString.call(date) === "[object Date]") && (isValidDate(date)) && (date instanceof Date) && !(date.hasOwnProperty('getMonth')) && !(date.hasOwnProperty('toString'))) {
       let month = date.getMonth();
-      console.log(date, month, date.hasOwnProperty('getMonth'));
+      //console.log(date, month, date.hasOwnProperty('getMonth'));
       if (month == 0 || month == 1 || month == 11) return 'winter';
       else if (month == 2 || month == 3 || month == 4) return 'spring';
       else if (month == 5 || month == 6 || month == 7) return 'summer'
       else return 'autumn';
-    } else throw new Error('Invalid date!');
+    } else throw Error('Invalid date!');
 
   } else return 'Unable to determine the time of year!'
 }
