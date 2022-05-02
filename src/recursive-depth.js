@@ -13,8 +13,8 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 class DepthCalculator {
-  calculateDepth(arr) {
-    let str = JSON.stringify(arr);
+  calculateDepth(arr, count = 1) {
+    /*let str = JSON.stringify(arr);
     let newstr = [...str].filter(i => (i == '[' || i == ']')).join('');
     //console.log(newstr);
     let counter = 0;
@@ -23,9 +23,27 @@ class DepthCalculator {
     }
     console.log('counter', counter);
     return counter;
+  }*/
+    /* let count = 1;
+     for (let i = 0; i < arr.length; i++) {
+       if (Array.isArray(arr[i])) {
+         arr = arr.flat();
+         //console.log('arr', arr, 'lenght', arr.length);
+         count++;
+         i--;
+       }
+     }
+     return count;
+   }*/
+    if (arr.some(el => Array.isArray(el))) {
+      count++;
+      return this.calculateDepth(arr.flat(1), count)
+    }
+
+    return count;
   }
 }
-
 module.exports = {
   DepthCalculator
 }
+// npm run test ./test/recursive*
