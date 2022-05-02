@@ -6,28 +6,30 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 const chainMaker = {
   getLength() {
-    return this.chain.length;
+    this.chain.length;
+    return this
   },
   addLink(value) {
-    if (arguments.length == 0) {
+    /*if (arguments.length == 0) {
       this.chain.push('');
     } else if (value === null) {
       this.chain.push('null');
     }
     else {
-      //console.log(value);
-      this.chain.push(value);
-      //console.log(this.chain.length, "add", this.chain);
-    }
-    return this;
+      //console.log(value);*/
+    this.chain.push(`( ${value} )`);
+    //console.log(this.chain.length, "add", this.chain);
+
+    return this
   },
   removeLink(position) {
-    if (typeof (position) !== 'number' || !Number.isInteger(position) || position > this.length || position <= 0) {
+    //if (typeof (position) !== 'number' || !Number.isInteger(position) || position > this.length || position <= 0) {
+    if (!this.chain[position - 1]) {
       this.chain = [];
-      throw new NotImplementedError('You can\'t remove incorrect link!');
+      throw new Error('You can\'t remove incorrect link!');
     } else {
       this.chain.splice(position - 1, 1);
-      return this;
+      return this
       //console.log(this.chain.length, "--", position, "remove", this.chain);
     }
 
@@ -36,12 +38,12 @@ const chainMaker = {
 
     this.chain.reverse();
     //console.log('reverse', this.chain);
-    return this;
+    return this
   },
   finishChain() {
-    finishArr = this.chain;
+    let finishArr = this.chain.join('~~');
     this.chain = [];
-    return '( ' + finishArr.join(' )~~( ') + ' )';
+    return finishArr
   },
   chain: []
 }
